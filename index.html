@@ -22,6 +22,7 @@
         .abbr { background: rgba(255, 255, 255, 0.05); padding: 8px 10px; font-weight: bold; font-size: 0.7rem; min-width: 45px; text-align: center; color: #94a3b8; }
         .link-text { padding: 8px 12px; flex: 1; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; }
         .domain { opacity: 0.3; font-size: 0.75rem; }
+        .icon-img { width: 24px; height: 24px; object-fit: contain; }
 
         @media (max-width: 640px) {
             .hide-mobile { display: none; }
@@ -73,15 +74,24 @@
 
     <div class="max-w-[1440px] mx-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+            
             <section>
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">My First Group</h2>
                 <div class="space-y-3">
                     <a href="http://127.0.0.1:32400/" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <img src="https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg" class="w-6 h-6 object-contain">
+                        <img src="https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg" class="icon-img">
                         <div class="flex flex-col"><span class="text-sm font-bold">Plex</span><span class="text-[10px] opacity-40">Plex Web 😎</span></div>
                     </a>
+                    <a href="http://192.168.0.10:8096/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/jellyfin.png" class="icon-img">
+                        <div class="flex flex-col"><span class="text-sm font-bold">Jellyfin</span><span class="text-[10px] opacity-40">Local Access</span></div>
+                    </a>
+                    <a href="http://84.228.108.50:8096/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/jellyfin.png" class="icon-img">
+                        <div class="flex flex-col"><span class="text-sm font-bold">Jellyfin (Remote)</span><span class="text-[10px] opacity-40">External Access</span></div>
+                    </a>
                     <a href="https://disk.yandex.com/client/disk" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/YandexDisk.png" class="w-6 h-6 object-contain">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/YandexDisk.png" class="icon-img">
                         <span class="text-sm font-bold">Disk Yandex</span>
                     </a>
                 </div>
@@ -91,11 +101,11 @@
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Live TV</h2>
                 <div class="space-y-3">
                     <a href="https://www.mako.co.il/mako-vod-index" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <img src="https://img.mako.co.il/2024/10/10/logo-12-desktop.png" class="w-6 h-6 object-contain">
+                        <img src="https://img.mako.co.il/2024/10/10/logo-12-desktop.png" class="icon-img">
                         <span class="text-sm font-bold">12 (Mako)</span>
                     </a>
                     <a href="https://13tv.co.il/live/" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <img src="https://media3.reshet.tv/image/upload/v1723018309/uploads/2024/904188721.webp" class="w-6 h-6 object-contain">
+                        <img src="https://media3.reshet.tv/image/upload/v1723018309/uploads/2024/904188721.webp" class="icon-img">
                         <span class="text-sm font-bold">13 (Reshet)</span>
                     </a>
                 </div>
@@ -104,8 +114,12 @@
             <section>
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Local Services</h2>
                 <div class="space-y-3">
+                    <a href="http://192.168.0.1/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-6 h-6 flex items-center justify-center text-gray-400 text-[8px] border border-white/20 rounded">RT</div>
+                        <span class="text-sm font-bold">Router</span>
+                    </a>
                     <a href="http://192.168.0.160:8123/" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="w-6 h-6 object-contain">
+                        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="icon-img">
                         <span class="text-sm font-bold">Home Assistant</span>
                     </a>
                 </div>
@@ -118,6 +132,10 @@
                         <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-[10px] font-bold text-white">RU</div>
                         <span class="text-sm font-bold">RuTracker</span>
                     </a>
+                    <a href="https://www.mcdonalds.com/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-6 h-6 bg-yellow-500 text-black rounded flex items-center justify-center text-[10px] font-black">M</div>
+                        <span class="text-sm font-bold">McDonald's</span>
+                    </a>
                 </div>
             </section>
         </div>
@@ -128,7 +146,6 @@
                 <h3 class="text-lg font-bold mb-5 opacity-60">Series</h3>
                 <div class="grid grid-cols-1 gap-1">
                     <a href="https://kinobase.org/serial/238991-sosedstvo" class="bookmark-item"><div class="abbr">RE</div><div class="link-text"><span>The Neighborhood</span><span class="domain">kinobase.org</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-12394/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מנאייכ (Manayek)</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                 </div>
             </div>
             <div class="md:col-span-6">
@@ -141,9 +158,7 @@
     <script>
         function updateTime() {
             const now = new Date();
-            // Часы
             document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-            // Дата на английском (напр. Wed, Mar 25)
             const options = { weekday: 'short', month: 'short', day: 'numeric' };
             document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
         }
@@ -151,16 +166,13 @@
         updateTime();
 
         async function fetchInfo() {
-            // Погода в Хулоне
             fetch('https://wttr.in/Holon?format=%t+%C').then(r => r.text()).then(t => document.getElementById('weather').textContent = t);
-            // Курсы Валют
             fetch('https://open.er-api.com/v6/latest/USD').then(r => r.json()).then(d => {
                 const usd = d.rates.ILS.toFixed(2);
                 const eur = (d.rates.ILS / d.rates.EUR).toFixed(2);
                 if(document.getElementById('usd-rate-mob')) document.getElementById('usd-rate-mob').textContent = `$${usd}`;
                 if(document.getElementById('eur-rate-mob')) document.getElementById('eur-rate-mob').textContent = `€${eur}`;
             });
-            // Публичный IP
             fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => {
                 document.getElementById('public-ip').textContent = d.ip;
                 if(document.getElementById('public-ip-mob')) document.getElementById('public-ip-mob').textContent = `IP ${d.ip}`;
