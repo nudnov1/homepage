@@ -13,17 +13,16 @@
             background-attachment: fixed;
             color: #e2e8f0;
             font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
         .glass-panel { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.1); }
         .service-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
         .service-card:hover { background: rgba(30, 41, 59, 0.8); transform: translateY(-1px); }
-        .bookmark-item { background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; border-radius: 6px; overflow: hidden; margin-bottom: 6px; text-decoration: none; color: inherit; transition: 0.2s; }
+        .bookmark-item { background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; border-radius: 6px; overflow: hidden; margin-bottom: 4px; text-decoration: none; color: inherit; transition: 0.2s; }
         .bookmark-item:hover { background: rgba(255, 255, 255, 0.08); }
-        .abbr { background: rgba(255, 255, 255, 0.05); padding: 8px 10px; font-weight: bold; font-size: 0.7rem; min-width: 45px; text-align: center; color: #94a3b8; }
-        .link-text { padding: 8px 12px; flex: 1; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; }
+        .abbr { background: rgba(255, 255, 255, 0.05); padding: 6px 10px; font-weight: bold; font-size: 0.7rem; min-width: 45px; text-align: center; color: #94a3b8; border-right: 1px solid rgba(255,255,255,0.05); }
+        .link-text { padding: 6px 12px; flex: 1; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; }
         .domain { opacity: 0.3; font-size: 0.75rem; }
-        .icon-img { width: 24px; height: 24px; object-fit: contain; }
+        .icon-img { width: 22px; height: 22px; object-fit: contain; }
 
         @media (max-width: 640px) {
             .hide-mobile { display: none; }
@@ -33,70 +32,97 @@
 </head>
 <body class="p-4 md:p-8">
 
-    <div class="max-w-[1440px] mx-auto mb-6 md:mb-10 glass-panel p-4 md:p-6 rounded-2xl">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-            <div class="flex items-center justify-between w-full md:w-auto gap-4 md:gap-10">
-                <div id="clock-container" class="flex items-baseline gap-3">
-                    <div id="date" class="text-gray-400 text-xs md:text-sm font-medium uppercase tracking-widest">...</div>
-                    <div id="clock" class="text-3xl md:text-5xl font-bold text-white tracking-tighter leading-none">00:00</div>
-                </div>
-                <div class="text-right md:text-left md:border-l border-white/10 md:pl-6">
-                    <span class="text-gray-500 block text-[10px] uppercase">Holon, IL</span>
-                    <span id="weather" class="text-yellow-500 font-bold text-sm md:text-base leading-tight">...</span>
-                </div>
-                <div class="hide-mobile border-l border-white/10 pl-6 space-y-1 text-[10px] font-mono">
-                    <div><span class="text-gray-500 uppercase">Local:</span> <span class="text-indigo-400">192.168.0.10</span></div>
-                    <div><span class="text-gray-500 uppercase">Public:</span> <span id="public-ip" class="text-purple-400">...</span></div>
-                </div>
+    <div class="max-w-[1440px] mx-auto mb-8 glass-panel p-4 md:p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center justify-between w-full md:w-auto gap-8">
+            <div id="clock-container" class="flex items-baseline gap-3">
+                <div id="date" class="text-gray-400 text-xs md:text-sm font-medium uppercase tracking-widest">...</div>
+                <div id="clock" class="text-3xl md:text-5xl font-bold text-white tracking-tighter leading-none">00:00</div>
             </div>
-            <div class="w-full md:max-w-md">
-                <form action="https://www.google.com/search" method="GET" target="_blank">
-                    <input type="text" name="q" placeholder="Search Google..." class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 md:py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50">
-                </form>
+            <div class="text-right md:text-left md:border-l border-white/10 md:pl-6">
+                <span class="text-gray-500 block text-[10px] uppercase">Holon, IL</span>
+                <span id="weather" class="text-yellow-500 font-bold text-sm leading-tight">...</span>
             </div>
+            <div class="hide-mobile border-l border-white/10 pl-6 text-[10px] font-mono space-y-1">
+                <div><span class="text-gray-500">LOCAL:</span> <span class="text-indigo-400">192.168.0.10</span></div>
+                <div><span class="text-gray-500">PUBLIC:</span> <span id="public-ip" class="text-purple-400">...</span></div>
+            </div>
+        </div>
+        <div class="w-full md:max-w-md">
+            <form action="https://www.google.com/search" method="GET" target="_blank">
+                <input type="text" name="q" placeholder="Search Google..." class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+            </form>
         </div>
     </div>
 
     <div class="max-w-[1440px] mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            
             <section>
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">My First Group</h2>
-                <div class="space-y-3">
-                    <a href="http://127.0.0.1:32400/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                <div class="space-y-2">
+                    <a href="http://127.0.0.1:32400/" class="service-card p-3 rounded-xl flex items-center gap-4">
                         <img src="https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg" class="icon-img">
                         <div class="flex flex-col"><span class="text-sm font-bold">Plex</span><span class="text-[10px] opacity-40">Plex Web 😎</span></div>
                     </a>
-                    <a href="http://192.168.0.10:8096/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                    <a href="http://192.168.0.10:8096/" class="service-card p-3 rounded-xl flex items-center gap-4">
                         <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/jellyfin.png" class="icon-img">
-                        <div class="flex flex-col"><span class="text-sm font-bold">Jellyfin</span><span class="text-[10px] opacity-40">Local</span></div>
+                        <span class="text-sm font-bold">Jellyfin</span>
                     </a>
-                    <a href="http://84.228.108.50:8096/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                    <a href="http://84.228.108.50:8096/" class="service-card p-3 rounded-xl flex items-center gap-4">
                         <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/jellyfin.png" class="icon-img">
-                        <div class="flex flex-col"><span class="text-sm font-bold">Jellyfin (Remote)</span><span class="text-[10px] opacity-40">External</span></div>
+                        <span class="text-sm font-bold">Jellyfin (Remote)</span>
+                    </a>
+                    <a href="https://disk.yandex.com/client/disk" class="service-card p-3 rounded-xl flex items-center gap-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/YandexDisk.png" class="icon-img">
+                        <span class="text-sm font-bold">Disk Yandex</span>
+                    </a>
+                    <a href="https://cloud.mail.ru/home/" class="service-card p-3 rounded-xl flex items-center gap-4">
+                        <img src="https://home.imgsmail.ru/whiteline/assets/logo/dark/logo.svg" class="icon-img">
+                        <span class="text-sm font-bold">Облако Mail.ru</span>
                     </a>
                 </div>
             </section>
-            <section><h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Live TV</h2><div class="space-y-3">
-                <a href="https://www.mako.co.il/mako-vod-index" class="service-card p-4 rounded-xl flex items-center gap-4"><img src="https://img.mako.co.il/2024/10/10/logo-12-desktop.png" class="icon-img"><span class="text-sm font-bold">12 (Mako)</span></a>
-            </div></section>
-            <section><h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Local</h2><div class="space-y-3">
-                <a href="http://192.168.0.160:8123/" class="service-card p-4 rounded-xl flex items-center gap-4"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="icon-img"><span class="text-sm font-bold">Home Assistant</span></a>
-            </div></section>
-            <section><h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Top</h2><div class="space-y-3">
-                <a href="https://rutracker.org/" class="service-card p-4 rounded-xl flex items-center gap-4"><div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-[10px] font-bold text-white">RU</div><span class="text-sm font-bold">RuTracker</span></a>
-            </div></section>
+
+            <section>
+                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Live TV</h2>
+                <div class="space-y-2">
+                    <a href="https://www.mako.co.il/mako-vod-index" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://img.mako.co.il/2024/10/10/logo-12-desktop.png" class="icon-img"><span class="text-sm font-bold">12 (Mako)</span></a>
+                    <a href="https://13tv.co.il/live/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://media3.reshet.tv/image/upload/v1723018309/uploads/2024/904188721.webp" class="icon-img"><span class="text-sm font-bold">13 (Reshet)</span></a>
+                    <a href="https://www.kan.org.il/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 flex items-center justify-center text-blue-400 font-bold text-[10px]">KAN</div><span class="text-sm font-bold">KAN</span></a>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Local Services</h2>
+                <div class="space-y-2">
+                    <a href="http://192.168.0.1/" class="service-card p-3 rounded-xl flex items-center gap-4"><span class="text-xs opacity-50 font-bold">RT</span><span class="text-sm font-bold">Router</span></a>
+                    <a href="http://nas/" class="service-card p-3 rounded-xl flex items-center gap-4"><span class="text-xs opacity-50 font-bold">NAS</span><span class="text-sm font-bold">NAS</span></a>
+                    <a href="http://192.168.0.160:8123/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="icon-img"><span class="text-sm font-bold">Home Assistant</span></a>
+                    <a href="http://192.168.0.160:3001/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://uptime.kuma.pet/img/icon.svg" class="icon-img"><span class="text-sm font-bold">Uptime Kuma</span></a>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Top Services</h2>
+                <div class="space-y-2">
+                    <a href="https://rutracker.org/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-blue-600 rounded flex items-center justify-center text-[8px] font-bold">RU</div><span class="text-sm font-bold">RuTracker</span></a>
+                    <a href="https://rutor.info/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-red-600 rounded flex items-center justify-center text-[8px] font-bold">RT</div><span class="text-sm font-bold">Rutor</span></a>
+                    <a href="https://www.mcdonalds.com/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-yellow-500 rounded text-black flex items-center justify-center text-[10px] font-black">M</div><span class="text-sm font-bold">McDonald's</span></a>
+                </div>
+            </section>
         </div>
 
-        <hr class="border-white/5 mb-10">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
             <div class="md:col-span-4">
-                <h3 class="text-lg font-bold mb-5 opacity-60">Series & Entertainment</h3>
-                <a href="https://kinobase.org/serial/238991-sosedstvo" class="bookmark-item"><div class="abbr">RE</div><div class="link-text"><span>The Neighborhood</span><span class="domain">kinobase.org</span></div></a>
+                <h3 class="text-lg font-bold mb-4 opacity-60">Developer & Series</h3>
+                <a href="https://github.com/" class="bookmark-item"><div class="abbr">GH</div><div class="link-text"><span>Github</span><span class="domain">github.com</span></div></a>
+                <a href="https://kinobase.org/serial/238991-sosedstvo" class="bookmark-item"><div class="abbr">RE</div><div class="link-text"><span>Соседство</span><span class="domain">kinobase.org</span></div></a>
                 <a href="https://youtube.com/" class="bookmark-item"><div class="abbr text-red-500">YT</div><div class="link-text"><span>YouTube</span><span class="domain">youtube.com</span></div></a>
             </div>
 
             <div class="md:col-span-8">
-                <h3 class="text-lg font-bold mb-5 opacity-60">My Sites</h3>
+                <h3 class="text-lg font-bold mb-4 opacity-60">My Sites</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
                     <a href="https://demo12.nudnov.net/" class="bookmark-item"><div class="abbr">D12</div><div class="link-text"><span>Demo 12</span><span class="domain">nudnov.net</span></div></a>
                     <a href="https://www.markatingtech.com/" class="bookmark-item"><div class="abbr">MT</div><div class="link-text"><span>Marketing Tech</span><span class="domain">markatingtech.com</span></div></a>
@@ -118,12 +144,9 @@
             document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         }
         setInterval(updateTime, 1000); updateTime();
-
         async function fetchInfo() {
             fetch('https://wttr.in/Holon?format=%t+%C').then(r => r.text()).then(t => document.getElementById('weather').textContent = t);
-            fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => {
-                document.getElementById('public-ip').textContent = d.ip;
-            });
+            fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => document.getElementById('public-ip').textContent = d.ip);
         }
         fetchInfo();
     </script>
