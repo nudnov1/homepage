@@ -15,10 +15,8 @@
             -webkit-tap-highlight-color: transparent;
         }
         .glass-panel { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.1); }
-        .service-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; touch-action: manipulation; }
-        .service-card:active { background: rgba(30, 41, 59, 0.8); transform: scale(0.98); }
-        
-        /* Стили для закладок как на скриншоте */
+        .service-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
+        .service-card:hover { background: rgba(30, 41, 59, 0.8); transform: translateY(-1px); }
         .bookmark-item { background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; border-radius: 6px; overflow: hidden; margin-bottom: 6px; text-decoration: none; color: inherit; }
         .abbr { background: rgba(255, 255, 255, 0.05); padding: 8px 10px; font-weight: bold; font-size: 0.7rem; min-width: 45px; text-align: center; color: #94a3b8; }
         .link-text { padding: 8px 12px; flex: 1; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; }
@@ -26,8 +24,8 @@
 
         @media (max-width: 640px) {
             .hide-mobile { display: none; }
-            .header-grid { grid-template-columns: 1fr auto; }
-            .service-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .service-grid { grid-template-columns: 1fr; }
+            #clock-container { flex-direction: column; align-items: flex-start; gap: 0; }
         }
     </style>
 </head>
@@ -36,8 +34,11 @@
     <div class="max-w-[1440px] mx-auto mb-6 md:mb-10 glass-panel p-4 md:p-6 rounded-2xl">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
             
-            <div class="flex items-center justify-between w-full md:w-auto gap-4 md:gap-8">
-                <div id="clock" class="text-3xl md:text-5xl font-bold text-white tracking-tighter">00:00</div>
+            <div class="flex items-center justify-between w-full md:w-auto gap-4 md:gap-10">
+                <div id="clock-container" class="flex items-baseline gap-3">
+                    <div id="date" class="text-gray-400 text-xs md:text-sm font-medium uppercase tracking-wider">...</div>
+                    <div id="clock" class="text-3xl md:text-5xl font-bold text-white tracking-tighter leading-none">00:00</div>
+                </div>
                 
                 <div class="text-right md:text-left md:border-l border-white/10 md:pl-6">
                     <span class="text-gray-500 block text-[10px] uppercase">Holon, IL</span>
@@ -46,18 +47,13 @@
 
                 <div class="hide-mobile border-l border-white/10 pl-6 space-y-1">
                     <div class="text-[10px] flex gap-2">
-                        <span class="text-gray-500 uppercase">Local IP:</span>
+                        <span class="text-gray-500 uppercase">Local:</span>
                         <span class="text-indigo-400 font-mono">192.168.0.10</span>
                     </div>
                     <div class="text-[10px] flex gap-2">
-                        <span class="text-gray-500 uppercase">Public IP:</span>
+                        <span class="text-gray-500 uppercase">Public:</span>
                         <span id="public-ip" class="text-purple-400 font-mono">...</span>
                     </div>
-                </div>
-
-                <div class="hide-mobile border-l border-white/10 pl-6 text-[10px] font-mono space-y-1">
-                    <div><span class="text-gray-500">USD:</span> <span id="usd-rate" class="text-green-500 font-bold">...</span></div>
-                    <div><span class="text-gray-500">EUR:</span> <span id="eur-rate" class="text-blue-500 font-bold">...</span></div>
                 </div>
             </div>
 
@@ -93,10 +89,6 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/YandexDisk.png" class="w-6 h-6 object-contain">
                         <span class="text-sm font-bold">Disk Yandex</span>
                     </a>
-                    <a href="https://cloud.mail.ru/home/" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <img src="https://home.imgsmail.ru/whiteline/assets/logo/dark/logo.svg" class="w-6 h-6 object-contain">
-                        <span class="text-sm font-bold">Облако Mail.ru</span>
-                    </a>
                 </div>
             </section>
 
@@ -111,10 +103,6 @@
                         <img src="https://media3.reshet.tv/image/upload/v1723018309/uploads/2024/904188721.webp" class="w-6 h-6 object-contain">
                         <span class="text-sm font-bold">13 (Reshet)</span>
                     </a>
-                    <a href="https://www.kan.org.il/" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-6 h-6 flex items-center justify-center text-blue-400 font-bold text-[10px] border border-blue-400/30 rounded">KAN</div>
-                        <span class="text-sm font-bold">KAN</span>
-                    </a>
                 </div>
             </section>
 
@@ -124,10 +112,6 @@
                     <a href="http://192.168.0.1/" class="service-card p-4 rounded-xl flex items-center gap-4">
                         <div class="w-6 h-6 flex items-center justify-center text-gray-400 text-[8px] border border-white/20 rounded">RT</div>
                         <span class="text-sm font-bold">Router</span>
-                    </a>
-                    <a href="http://nas/" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-6 h-6 flex items-center justify-center text-gray-400 text-[8px] border border-white/20 rounded">NAS</div>
-                        <span class="text-sm font-bold">NAS</span>
                     </a>
                     <a href="http://192.168.0.160:8123/" class="service-card p-4 rounded-xl flex items-center gap-4">
                         <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="w-6 h-6 object-contain">
@@ -140,12 +124,12 @@
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Top Services</h2>
                 <div class="space-y-3">
                     <a href="https://rutracker.org/" class="service-card p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-[10px] font-bold">RU</div>
+                        <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-[10px] font-bold text-white">RU</div>
                         <span class="text-sm font-bold">RuTracker</span>
                     </a>
                     <a href="https://www.mcdonalds.com/" class="service-card p-4 rounded-xl flex items-center gap-4">
                         <div class="w-6 h-6 bg-yellow-500 text-black rounded flex items-center justify-center text-[10px] font-black">M</div>
-                        <span class="text-sm font-bold">McDonald's</span>
+                        <span class="text-sm font-bold text-white">McDonald's</span>
                     </a>
                 </div>
             </section>
@@ -162,14 +146,8 @@
                 <h3 class="text-lg font-bold mb-5 opacity-60">Сериалы</h3>
                 <div class="grid grid-cols-1 gap-1">
                     <a href="https://kinobase.org/serial/238991-sosedstvo" class="bookmark-item"><div class="abbr">RE</div><div class="link-text"><span>Соседство</span><span class="domain">kinobase.org</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-11247/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>The Malevolent Bride</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                     <a href="https://www.mako.co.il/mako-vod-keshet/masterchef" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מאסטר שף</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
-                    <a href="https://13tv.co.il/allshows/series/144/season/1/2015423/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>פרודים</span><span class="domain" dir="ltr">13tv.co.il</span></div></a>
-                    <a href="https://www.mako.co.il/mako-vod-keshet/sabri-maranan" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>סברי מרנן</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
-                    <a href="https://www.mako.co.il/mako-vod-keshet/red_alert" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>אור ראשон</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-578430/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>האיש שרצה לדעת הכל</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-12394/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מנайк</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-535919/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>הамет</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-12394/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מנаייכ</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                 </div>
             </div>
 
@@ -177,23 +155,27 @@
                 <h3 class="text-lg font-bold mb-5 opacity-60">Entertainment</h3>
                 <a href="https://youtube.com/" class="bookmark-item"><div class="abbr text-red-500">YT</div><div class="link-text"><span>YouTube</span><span class="domain">youtube.com</span></div></a>
                 <a href="https://seasonvar.ru/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>seasonvar</span><span class="domain">seasonvar.ru</span></div></a>
-                <a href="https://www.ontvtime.ru/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>Онлайн ТВ</span><span class="domain">ontvtime.ru</span></div></a>
-                <a href="https://kinobase.org/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>Фильмы онлайн</span><span class="domain">kinobase.org</span></div></a>
             </div>
         </div>
     </div>
 
     <script>
-        function updateClock() { document.getElementById('clock').textContent = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }); }
-        setInterval(updateClock, 1000); updateClock();
+        function updateTime() {
+            const now = new Date();
+            // Обновляем часы
+            document.getElementById('clock').textContent = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+            // Обновляем дату (напр. "25 МАРТА, СР")
+            const options = { day: 'numeric', month: 'short', weekday: 'short' };
+            document.getElementById('date').textContent = now.toLocaleDateString('ru-RU', options).replace('.', '');
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
 
         async function fetchInfo() {
             fetch('https://wttr.in/Holon?format=%t+%C').then(r => r.text()).then(t => document.getElementById('weather').textContent = t);
             fetch('https://open.er-api.com/v6/latest/USD').then(r => r.json()).then(d => {
                 const usd = d.rates.ILS.toFixed(2);
                 const eur = (d.rates.ILS / d.rates.EUR).toFixed(2);
-                document.getElementById('usd-rate').textContent = `₪${usd}`;
-                document.getElementById('eur-rate').textContent = `₪${eur}`;
                 if(document.getElementById('usd-rate-mob')) document.getElementById('usd-rate-mob').textContent = `₪${usd}`;
                 if(document.getElementById('eur-rate-mob')) document.getElementById('eur-rate-mob').textContent = `₪${eur}`;
             });
