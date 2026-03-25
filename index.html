@@ -13,13 +13,11 @@
             background-attachment: fixed;
             color: #e2e8f0;
             font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
         .glass-panel { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.1); }
         .service-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
         .service-card:hover { background: rgba(30, 41, 59, 0.8); transform: translateY(-1px); }
-        .bookmark-item { background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; border-radius: 6px; overflow: hidden; margin-bottom: 4px; text-decoration: none; color: inherit; transition: 0.2s; }
-        .bookmark-item:hover { background: rgba(255, 255, 255, 0.08); }
+        .bookmark-item { background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; border-radius: 6px; overflow: hidden; margin-bottom: 4px; text-decoration: none; color: inherit; }
         .abbr { background: rgba(255, 255, 255, 0.05); padding: 6px 10px; font-weight: bold; font-size: 0.7rem; min-width: 45px; text-align: center; color: #94a3b8; border-right: 1px solid rgba(255,255,255,0.05); }
         .link-text { padding: 6px 12px; flex: 1; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; }
         .domain { opacity: 0.3; font-size: 0.75rem; }
@@ -27,9 +25,9 @@
 
         @media (max-width: 640px) {
             .mobile-center { display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; }
-            .mobile-row { display: block; width: 100%; }
-            #clock-container { flex-direction: column; align-items: center; order: -1; margin-bottom: 0.5rem; }
-            #date { order: -1; margin-bottom: 0.25rem; }
+            .mobile-inline-row { display: flex; justify-content: center; gap: 1rem; width: 100%; }
+            #clock-container { flex-direction: column; align-items: center; order: -2; }
+            #date { order: -3; margin-bottom: 0.25rem; }
             .header-info-container { flex-direction: column; gap: 0.75rem; }
             .border-mobile-none { border: none !important; padding: 0 !important; }
         }
@@ -47,14 +45,18 @@
                 </div>
                 
                 <div class="mobile-center border-mobile-none md:border-l border-white/10 md:pl-6 leading-tight">
-                    <span class="mobile-row text-gray-500 text-[10px] uppercase">Holon, IL</span>
-                    <span id="weather" class="mobile-row text-yellow-500 font-bold text-sm">...</span>
+                    <div class="flex md:flex-col items-center md:items-start gap-2">
+                        <span class="text-gray-500 text-[10px] uppercase">Holon, IL</span>
+                        <span id="weather" class="text-yellow-500 font-bold text-sm">...</span>
+                    </div>
                 </div>
 
                 <div class="mobile-center border-mobile-none flex flex-col md:flex-row gap-2 md:gap-6 md:border-l border-white/10 md:pl-6 text-[10px] font-mono">
-                    <div class="mobile-row"><span class="text-gray-500 uppercase mr-1 md:block md:mb-1">USD:</span><span id="usd-rate" class="text-green-500 font-bold text-sm">...</span></div>
-                    <div class="mobile-row"><span class="text-gray-500 uppercase mr-1 md:block md:mb-1">EUR:</span><span id="eur-rate" class="text-blue-500 font-bold text-sm">...</span></div>
-                    <div class="mobile-row"><span class="text-gray-500 uppercase mr-1 md:block md:mb-1">Public IP:</span><span id="public-ip" class="text-purple-400 font-bold text-sm">...</span></div>
+                    <div class="mobile-inline-row flex gap-4">
+                        <div><span class="text-gray-500 uppercase mr-1">USD:</span><span id="usd-rate" class="text-green-500 font-bold text-sm">...</span></div>
+                        <div><span class="text-gray-500 uppercase mr-1">EUR:</span><span id="eur-rate" class="text-blue-500 font-bold text-sm">...</span></div>
+                    </div>
+                    <div class="mobile-center"><span class="text-gray-500 uppercase mr-1 md:block md:mb-1">Public IP:</span><span id="public-ip" class="text-purple-400 font-bold text-sm">...</span></div>
                 </div>
             </div>
 
@@ -79,6 +81,7 @@
                     <a href="https://cloud.mail.ru/home/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://home.imgsmail.ru/whiteline/assets/logo/dark/logo.svg" class="icon-img"><span class="text-sm font-bold">Облако Mail.ru</span></a>
                 </div>
             </section>
+
             <section>
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Live TV</h2>
                 <div class="space-y-2">
@@ -87,6 +90,7 @@
                     <a href="https://www.kan.org.il/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 flex items-center justify-center text-blue-400 font-bold text-[10px]">KAN</div><span class="text-sm font-bold">KAN</span></a>
                 </div>
             </section>
+
             <section>
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">My Local Services</h2>
                 <div class="space-y-2">
@@ -98,6 +102,7 @@
                     <a href="http://192.168.0.160:3001/dashboard" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://uptime.kuma.pet/img/icon.svg" class="icon-img"><span class="text-sm font-bold">Uptime Kuma</span></a>
                 </div>
             </section>
+
             <section>
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Top Services</h2>
                 <div class="space-y-2">
@@ -111,7 +116,7 @@
         </div>
 
         <hr class="border-white/5 mb-8">
-        <div class="bookmark-grid grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
             <div class="md:col-span-3">
                 <h2 class="text-sm font-bold mb-4 opacity-50 uppercase tracking-widest">Developer</h2>
                 <div class="space-y-1">
@@ -123,7 +128,13 @@
                 <h2 class="text-sm font-bold mb-4 opacity-50 uppercase tracking-widest">Сериалы</h2>
                 <div class="space-y-1">
                     <a href="https://kinobase.org/serial/238991-sosedstvo" class="bookmark-item"><div class="abbr">RE</div><div class="link-text"><span>Соседство</span><span class="domain">kinobase.org</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-11247/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>The Malevolent Bride</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-11247/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>The Malevolent Bride (מלאך משחית)</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.mako.co.il/mako-vod-keshet/masterchef" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מאסטר שף</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
+                    <a href="https://13tv.co.il/allshows/series/144/season/1/2015423/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>פרודים</span><span class="domain" dir="ltr">13tv.co.il</span></div></a>
+                    <a href="https://www.mako.co.il/mako-vod-keshet/sabri-maranan" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>סברי מרנן</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
+                    <a href="https://www.mako.co.il/mako-vod-keshet/red_alert" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>אור ראשון</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-578430/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>האיש שרצה לדעת הכל</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-12394/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מנאייכ</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                     <a href="https://www.kan.org.il/content/kan/kan-11/p-535919/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>האמת</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                 </div>
             </div>
@@ -133,6 +144,8 @@
                 <div class="space-y-1">
                     <a href="https://youtube.com/" class="bookmark-item"><div class="abbr text-red-500">YT</div><div class="link-text"><span>YouTube</span><span class="domain">youtube.com</span></div></a>
                     <a href="https://seasonvar.ru/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>seasonvar</span><span class="domain">seasonvar.ru</span></div></a>
+                    <a href="https://www.ontvtime.ru/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>Онлайн телевидение</span><span class="domain">ontvtime.ru</span></div></a>
+                    <a href="https://kinobase.org/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>Фильмы онлайн</span><span class="domain">kinobase.org</span></div></a>
                 </div>
             </div>
         </div>
@@ -141,6 +154,12 @@
             <h2 class="text-sm font-bold mb-4 opacity-50 uppercase tracking-widest">My Sites (Nudnov)</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <a href="https://demo12.nudnov.net/" class="bookmark-item"><div class="abbr">D12</div><div class="link-text"><span>Demo 12</span><span class="domain">nudnov.net</span></div></a>
+                <a href="https://www.markatingtech.com/" class="bookmark-item"><div class="abbr">MT</div><div class="link-text"><span>Marketing Tech</span><span class="domain">markatingtech.com</span></div></a>
+                <a href="https://1.nudnov.net/" class="bookmark-item"><div class="abbr">N1</div><div class="link-text"><span>Nudnov 1</span><span class="domain">nudnov.net</span></div></a>
+                <a href="https://tools.nudnov.net/" class="bookmark-item"><div class="abbr">TL</div><div class="link-text"><span>Tools</span><span class="domain">nudnov.net</span></div></a>
+                <a href="https://keep.nudnov.net/signin" class="bookmark-item"><div class="abbr">KP</div><div class="link-text"><span>Keep Notes</span><span class="domain">nudnov.net</span></div></a>
+                <a href="https://pass.nudnov.net/#/login" class="bookmark-item"><div class="abbr">PS</div><div class="link-text"><span>Passwords</span><span class="domain">nudnov.net</span></div></a>
+                <a href="https://vault.nudnov.net/#/login" class="bookmark-item"><div class="abbr">VT</div><div class="link-text"><span>Vault</span><span class="domain">nudnov.net</span></div></a>
                 <a href="https://mytmp1.nudnov.net/" class="bookmark-item"><div class="abbr">TM</div><div class="link-text"><span>Temp 1</span><span class="domain">nudnov.net</span></div></a>
             </div>
         </div>
