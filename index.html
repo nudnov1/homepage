@@ -12,178 +12,172 @@
             background-size: cover;
             background-attachment: fixed;
             color: #e2e8f0;
+            -webkit-tap-highlight-color: transparent;
         }
-        .glass-panel { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.05); }
-        .service-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
-        .service-card:hover { background: rgba(30, 41, 59, 0.8); transform: translateY(-1px); }
-        .bookmark-item { background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; border-radius: 4px; overflow: hidden; margin-bottom: 4px; text-decoration: none; color: inherit; }
-        .bookmark-item:hover { background: rgba(255, 255, 255, 0.08); }
-        .abbr { background: rgba(255, 255, 255, 0.05); padding: 4px 8px; font-weight: bold; font-size: 0.65rem; min-width: 40px; text-align: center; color: #94a3b8; border-right: 1px solid rgba(255,255,255,0.05); }
-        .link-text { padding: 4px 12px; flex: 1; font-size: 0.8rem; display: flex; justify-content: space-between; }
-        .domain { opacity: 0.3; font-size: 0.7rem; }
-        .icon-img { width: 22px; height: 22px; object-fit: contain; }
+        .glass-panel { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.1); }
+        .service-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; touch-action: manipulation; }
+        .service-card:active { background: rgba(30, 41, 59, 0.8); transform: scale(0.98); }
+        
+        /* Стили для закладок как на скриншоте */
+        .bookmark-item { background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; border-radius: 6px; overflow: hidden; margin-bottom: 6px; text-decoration: none; color: inherit; }
+        .abbr { background: rgba(255, 255, 255, 0.05); padding: 8px 10px; font-weight: bold; font-size: 0.7rem; min-width: 45px; text-align: center; color: #94a3b8; }
+        .link-text { padding: 8px 12px; flex: 1; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; }
+        .domain { opacity: 0.3; font-size: 0.75rem; }
+
+        @media (max-width: 640px) {
+            .hide-mobile { display: none; }
+            .header-grid { grid-template-columns: 1fr auto; }
+            .service-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
     </style>
 </head>
-<body class="p-6">
+<body class="p-4 md:p-8">
 
-    <div class="max-w-[1440px] mx-auto mb-10 glass-panel p-5 rounded-2xl flex flex-wrap justify-between items-center gap-6">
-        <div class="flex items-center gap-8">
-            <div id="clock" class="text-4xl font-bold text-white tracking-tighter">00:00</div>
+    <div class="max-w-[1440px] mx-auto mb-6 md:mb-10 glass-panel p-4 md:p-6 rounded-2xl">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
             
-            <div class="text-xs border-l border-white/10 pl-6">
-                <span class="text-gray-500 block uppercase mb-1">Holon, IL</span>
-                <span id="weather" class="text-yellow-500 font-bold text-sm">...</span>
-            </div>
+            <div class="flex items-center justify-between w-full md:w-auto gap-4 md:gap-8">
+                <div id="clock" class="text-3xl md:text-5xl font-bold text-white tracking-tighter">00:00</div>
+                
+                <div class="text-right md:text-left md:border-l border-white/10 md:pl-6">
+                    <span class="text-gray-500 block text-[10px] uppercase">Holon, IL</span>
+                    <span id="weather" class="text-yellow-500 font-bold text-sm md:text-base leading-tight">...</span>
+                </div>
 
-            <div class="text-[10px] border-l border-white/10 pl-6 flex gap-6">
+                <div class="hide-mobile border-l border-white/10 pl-6 space-y-1">
+                    <div class="text-[10px] flex gap-2">
+                        <span class="text-gray-500 uppercase">Local IP:</span>
+                        <span class="text-indigo-400 font-mono">192.168.0.10</span>
+                    </div>
+                    <div class="text-[10px] flex gap-2">
+                        <span class="text-gray-500 uppercase">Public IP:</span>
+                        <span id="public-ip" class="text-purple-400 font-mono">...</span>
+                    </div>
+                </div>
 
-                <div>
-                    <span class="text-gray-500 block uppercase mb-1">Public IP</span>
-                    <span id="public-ip" class="text-purple-400 font-mono">...</span>
+                <div class="hide-mobile border-l border-white/10 pl-6 text-[10px] font-mono space-y-1">
+                    <div><span class="text-gray-500">USD:</span> <span id="usd-rate" class="text-green-500 font-bold">...</span></div>
+                    <div><span class="text-gray-500">EUR:</span> <span id="eur-rate" class="text-blue-500 font-bold">...</span></div>
                 </div>
             </div>
 
-            <div class="text-[10px] border-l border-white/10 pl-6 flex gap-5 font-mono">
-                <div><span class="text-gray-500 block mb-1 uppercase">USD</span><span id="usd-rate" class="text-green-500 text-sm font-bold">...</span></div>
-                <div><span class="text-gray-500 block mb-1 uppercase">EUR</span><span id="eur-rate" class="text-blue-500 text-sm font-bold">...</span></div>
+            <div class="w-full md:max-w-md">
+                <form action="https://www.google.com/search" method="GET" target="_blank">
+                    <input type="text" name="q" placeholder="Поиск в Google..." class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 md:py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                </form>
             </div>
         </div>
-
-        <div class="flex-1 max-w-md">
-            <form action="https://www.google.com/search" method="GET" target="_blank">
-                <input type="text" name="q" placeholder="Поиск в Google..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all">
-            </form>
+        
+        <div class="md:hidden flex justify-between mt-4 pt-4 border-t border-white/5 text-[10px] font-mono opacity-70">
+            <div>USD <span id="usd-rate-mob" class="text-green-400">...</span></div>
+            <div>EUR <span id="eur-rate-mob" class="text-blue-400">...</span></div>
+            <div id="public-ip-mob">IP ...</div>
         </div>
     </div>
 
     <div class="max-w-[1440px] mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 mb-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
             
             <section>
-                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-[0.2em] ml-1">My First Group</h2>
-                <div class="space-y-2">
-                    <a href="http://127.0.0.1:32400/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg" class="icon-img" alt="Plex">
+                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">My First Group</h2>
+                <div class="space-y-3">
+                    <a href="http://127.0.0.1:32400/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <img src="https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg" class="w-6 h-6 object-contain">
                         <div class="flex flex-col"><span class="text-sm font-bold">Plex</span><span class="text-[10px] opacity-40">Plex Web 😎</span></div>
                     </a>
-                    <a href="https://www.youtube.com/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center text-red-500 font-bold text-xs uppercase">YT</div>
+                    <a href="https://www.youtube.com/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-6 h-6 flex items-center justify-center text-red-500 font-bold text-xs border border-red-500/30 rounded">YT</div>
                         <span class="text-sm font-bold">YouTube</span>
                     </a>
-                    <a href="https://disk.yandex.com/client/disk" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/YandexDisk.png" class="icon-img">
+                    <a href="https://disk.yandex.com/client/disk" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/YandexDisk.png" class="w-6 h-6 object-contain">
                         <span class="text-sm font-bold">Disk Yandex</span>
                     </a>
-                    <a href="https://cloud.mail.ru/home/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://home.imgsmail.ru/whiteline/assets/logo/dark/logo.svg" class="icon-img">
+                    <a href="https://cloud.mail.ru/home/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <img src="https://home.imgsmail.ru/whiteline/assets/logo/dark/logo.svg" class="w-6 h-6 object-contain">
                         <span class="text-sm font-bold">Облако Mail.ru</span>
                     </a>
                 </div>
             </section>
 
             <section>
-                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-[0.2em] ml-1">Live TV</h2>
-                <div class="space-y-2">
-                    <a href="https://www.mako.co.il/mako-vod-index" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://img.mako.co.il/2024/10/10/logo-12-desktop.png" class="icon-img">
+                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Live TV</h2>
+                <div class="space-y-3">
+                    <a href="https://www.mako.co.il/mako-vod-index" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <img src="https://img.mako.co.il/2024/10/10/logo-12-desktop.png" class="w-6 h-6 object-contain">
                         <span class="text-sm font-bold">12 (Mako)</span>
                     </a>
-                    <a href="https://13tv.co.il/live/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://media3.reshet.tv/image/upload/c_scale,h_35,f_auto,q_auto:best/v1723018309/uploads/2024/904188721.webp" class="icon-img">
+                    <a href="https://13tv.co.il/live/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <img src="https://media3.reshet.tv/image/upload/v1723018309/uploads/2024/904188721.webp" class="w-6 h-6 object-contain">
                         <span class="text-sm font-bold">13 (Reshet)</span>
                     </a>
-                    <a href="https://www.kan.org.il/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center text-blue-400 font-bold text-[10px]">KAN</div>
+                    <a href="https://www.kan.org.il/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-6 h-6 flex items-center justify-center text-blue-400 font-bold text-[10px] border border-blue-400/30 rounded">KAN</div>
                         <span class="text-sm font-bold">KAN</span>
                     </a>
                 </div>
             </section>
 
             <section>
-                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-[0.2em] ml-1">My Local Services</h2>
-                <div class="space-y-2">
-                    <a href="http://192.168.0.1/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center text-gray-400 font-bold text-[8px]">ROUTER</div>
+                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Local Services</h2>
+                <div class="space-y-3">
+                    <a href="http://192.168.0.1/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-6 h-6 flex items-center justify-center text-gray-400 text-[8px] border border-white/20 rounded">RT</div>
                         <span class="text-sm font-bold">Router</span>
                     </a>
-                    <a href="http://nas/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center text-gray-400 font-bold text-[10px]">NAS</div>
+                    <a href="http://nas/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-6 h-6 flex items-center justify-center text-gray-400 text-[8px] border border-white/20 rounded">NAS</div>
                         <span class="text-sm font-bold">NAS</span>
                     </a>
-                    <a href="http://192.168.0.158:8081/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/metube.svg" class="icon-img">
-                        <span class="text-sm font-bold">MeTube</span>
-                    </a>
-                    <a href="http://192.168.0.160:8123/dashboard-panel/0" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="icon-img">
+                    <a href="http://192.168.0.160:8123/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="w-6 h-6 object-contain">
                         <span class="text-sm font-bold">Home Assistant</span>
-                    </a>
-                    <a href="http://192.168.0.160:4357/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant-alt.svg" class="icon-img">
-                        <span class="text-sm font-bold">HA observer</span>
-                    </a>
-                    <a href="http://192.168.0.160:3001/dashboard" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <img src="https://uptime.kuma.pet/img/icon.svg" class="icon-img">
-                        <span class="text-sm font-bold">Uptime Kuma</span>
                     </a>
                 </div>
             </section>
 
             <section>
-                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-[0.2em] ml-1">Top Services</h2>
-                <div class="space-y-2">
-                    <a href="https://megapeer.vip/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center bg-blue-500 rounded text-[8px] font-bold">MG</div>
-                        <span class="text-sm font-bold">megapeer</span>
+                <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Top Services</h2>
+                <div class="space-y-3">
+                    <a href="https://rutracker.org/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-[10px] font-bold">RU</div>
+                        <span class="text-sm font-bold">RuTracker</span>
                     </a>
-                    <a href="https://go3.utorr.cc/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center bg-green-600 rounded text-[8px] font-bold">UT</div>
-                        <span class="text-sm font-bold">utorr</span>
-                    </a>
-                    <a href="https://rutracker.org/forum/index.php" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center bg-blue-600 rounded text-[8px] font-bold">RU</div>
-                        <span class="text-sm font-bold">rutracker</span>
-                    </a>
-                    <a href="https://rutor.info/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center bg-red-600 rounded text-[8px] font-bold">RT</div>
-                        <span class="text-sm font-bold">rutor</span>
-                    </a>
-                    <a href="https://www.mcdonalds.com/" class="service-card p-3 rounded-xl flex items-center gap-4">
-                        <div class="w-[22px] h-[22px] flex items-center justify-center bg-yellow-500 text-black rounded text-[10px] font-black">M</div>
-                        <div class="flex flex-col"><span class="text-sm font-bold">McDonald’s</span><span class="text-[10px] opacity-40 italic">homepage</span></div>
+                    <a href="https://www.mcdonalds.com/" class="service-card p-4 rounded-xl flex items-center gap-4">
+                        <div class="w-6 h-6 bg-yellow-500 text-black rounded flex items-center justify-center text-[10px] font-black">M</div>
+                        <span class="text-sm font-bold">McDonald's</span>
                     </a>
                 </div>
             </section>
         </div>
 
         <hr class="border-white/5 mb-10">
-
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
             <div class="md:col-span-3">
-                <h2 class="text-lg font-bold mb-5 opacity-70">Developer</h2>
+                <h3 class="text-lg font-bold mb-5 opacity-60">Developer</h3>
                 <a href="https://github.com/" class="bookmark-item"><div class="abbr">GH</div><div class="link-text"><span>Github</span><span class="domain">github.com</span></div></a>
             </div>
 
             <div class="md:col-span-6">
-                <h2 class="text-lg font-bold mb-5 opacity-70">Сериалы</h2>
+                <h3 class="text-lg font-bold mb-5 opacity-60">Сериалы</h3>
                 <div class="grid grid-cols-1 gap-1">
                     <a href="https://kinobase.org/serial/238991-sosedstvo" class="bookmark-item"><div class="abbr">RE</div><div class="link-text"><span>Соседство</span><span class="domain">kinobase.org</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-11247/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>The Malevolent Bride (מלאך משחית)</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-11247/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>The Malevolent Bride</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                     <a href="https://www.mako.co.il/mako-vod-keshet/masterchef" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מאסטר שף</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
                     <a href="https://13tv.co.il/allshows/series/144/season/1/2015423/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>פרודים</span><span class="domain" dir="ltr">13tv.co.il</span></div></a>
                     <a href="https://www.mako.co.il/mako-vod-keshet/sabri-maranan" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>סברי מרנן</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
-                    <a href="https://www.mako.co.il/mako-vod-keshet/red_alert" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>אור ראשון</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
+                    <a href="https://www.mako.co.il/mako-vod-keshet/red_alert" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>אור ראשон</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
                     <a href="https://www.kan.org.il/content/kan/kan-11/p-578430/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>האיש שרצה לדעת הכל</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-12394/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מנאייכ</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-535919/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>האמת</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-12394/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מנайк</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-535919/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>הамет</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                 </div>
             </div>
 
             <div class="md:col-span-3">
-                <h2 class="text-lg font-bold mb-5 opacity-70">Entertainment</h2>
+                <h3 class="text-lg font-bold mb-5 opacity-60">Entertainment</h3>
                 <a href="https://youtube.com/" class="bookmark-item"><div class="abbr text-red-500">YT</div><div class="link-text"><span>YouTube</span><span class="domain">youtube.com</span></div></a>
                 <a href="https://seasonvar.ru/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>seasonvar</span><span class="domain">seasonvar.ru</span></div></a>
-                <a href="https://www.ontvtime.ru/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>Онлайн телевидение</span><span class="domain">ontvtime.ru</span></div></a>
+                <a href="https://www.ontvtime.ru/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>Онлайн ТВ</span><span class="domain">ontvtime.ru</span></div></a>
                 <a href="https://kinobase.org/" class="bookmark-item"><div class="abbr"></div><div class="link-text"><span>Фильмы онлайн</span><span class="domain">kinobase.org</span></div></a>
             </div>
         </div>
@@ -194,17 +188,19 @@
         setInterval(updateClock, 1000); updateClock();
 
         async function fetchInfo() {
-            // Weather from wttr.in
             fetch('https://wttr.in/Holon?format=%t+%C').then(r => r.text()).then(t => document.getElementById('weather').textContent = t);
-            
-            // Currency from ExchangeRate-API
             fetch('https://open.er-api.com/v6/latest/USD').then(r => r.json()).then(d => {
-                document.getElementById('usd-rate').textContent = `₪${d.rates.ILS.toFixed(2)}`;
-                document.getElementById('eur-rate').textContent = `₪${(d.rates.ILS / d.rates.EUR).toFixed(2)}`;
+                const usd = d.rates.ILS.toFixed(2);
+                const eur = (d.rates.ILS / d.rates.EUR).toFixed(2);
+                document.getElementById('usd-rate').textContent = `₪${usd}`;
+                document.getElementById('eur-rate').textContent = `₪${eur}`;
+                if(document.getElementById('usd-rate-mob')) document.getElementById('usd-rate-mob').textContent = `₪${usd}`;
+                if(document.getElementById('eur-rate-mob')) document.getElementById('eur-rate-mob').textContent = `₪${eur}`;
             });
-            
-            // Public IP from ipify
-            fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => document.getElementById('public-ip').textContent = d.ip);
+            fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => {
+                document.getElementById('public-ip').textContent = d.ip;
+                if(document.getElementById('public-ip-mob')) document.getElementById('public-ip-mob').textContent = `IP ${d.ip}`;
+            });
         }
         fetchInfo();
     </script>
