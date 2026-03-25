@@ -7,12 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
+            /* Background settings from settings.yaml */
             background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
                         url('https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80');
             background-size: cover;
             background-attachment: fixed;
-            color: #e2e8f0;
+            color: #e2e8f0; /* Slate color theme */
             font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         .glass-panel { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.1); }
         .service-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
@@ -28,7 +30,6 @@
             .mobile-inline-row { display: flex; justify-content: center; gap: 1rem; width: 100%; }
             #clock-container { flex-direction: column; align-items: center; order: -2; }
             #date { order: -3; margin-bottom: 0.25rem; }
-            .header-info-container { flex-direction: column; gap: 0.75rem; }
             .border-mobile-none { border: none !important; padding: 0 !important; }
         }
     </style>
@@ -37,7 +38,7 @@
 
     <div class="max-w-[1440px] mx-auto mb-8 glass-panel p-4 md:p-6 rounded-2xl">
         <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="header-info-container flex flex-wrap items-center justify-between w-full md:w-auto gap-4 md:gap-8">
+            <div class="flex flex-wrap items-center justify-between w-full md:w-auto gap-4 md:gap-8">
                 
                 <div id="clock-container" class="mobile-center flex items-baseline gap-3">
                     <div id="date" class="text-gray-400 text-xs md:text-sm font-medium uppercase tracking-widest">...</div>
@@ -46,15 +47,15 @@
                 
                 <div class="mobile-center border-mobile-none md:border-l border-white/10 md:pl-6 leading-tight">
                     <div class="flex md:flex-col items-center md:items-start gap-2">
-                        <span class="text-gray-500 text-[10px] uppercase">Holon, IL</span>
+                        <span class="text-gray-500 text-[10px] uppercase font-bold">Holon, IL</span>
                         <span id="weather" class="text-yellow-500 font-bold text-sm">...</span>
                     </div>
                 </div>
 
                 <div class="mobile-center border-mobile-none flex flex-col md:flex-row gap-2 md:gap-6 md:border-l border-white/10 md:pl-6 text-[10px] font-mono">
                     <div class="mobile-inline-row flex gap-4">
-                        <div><span class="text-gray-500 uppercase mr-1">USD:</span><span id="usd-rate" class="text-green-500 font-bold text-sm">...</span></div>
-                        <div><span class="text-gray-500 uppercase mr-1">EUR:</span><span id="eur-rate" class="text-blue-500 font-bold text-sm">...</span></div>
+                        <div><span class="text-gray-500 uppercase mr-1">USD:</span><span id="usd-rate" class="text-green-500 font-bold text-sm">₪3.13</span></div>
+                        <div><span class="text-gray-500 uppercase mr-1">EUR:</span><span id="eur-rate" class="text-blue-500 font-bold text-sm">₪3.62</span></div>
                     </div>
                     <div class="mobile-center"><span class="text-gray-500 uppercase mr-1 md:block md:mb-1">Public IP:</span><span id="public-ip" class="text-purple-400 font-bold text-sm">...</span></div>
                 </div>
@@ -70,15 +71,34 @@
 
     <div class="max-w-[1440px] mx-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            
             <section>
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">My First Group</h2>
                 <div class="space-y-2">
-                    <a href="http://127.0.0.1:32400/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg" class="icon-img"><div class="flex flex-col"><span class="text-sm font-bold">Plex</span><span class="text-[10px] opacity-40">Plex Web 😎</span></div></a>
-                    <a href="http://192.168.0.10:8096/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 flex items-center justify-center text-blue-400 font-bold text-[8px] border border-blue-400/30 rounded">JF</div><span class="text-sm font-bold">Jellyfin</span></a>
-                    <a href="http://84.228.108.50:8096/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 flex items-center justify-center text-blue-400 font-bold text-[8px] border border-blue-400/30 rounded">JF</div><span class="text-sm font-bold">Jellyfin Remote</span></a>
-                    <a href="https://www.youtube.com/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 flex items-center justify-center text-red-500 font-bold text-[10px]">YT</div><span class="text-sm font-bold">YouTube</span></a>
-                    <a href="https://disk.yandex.com/client/disk" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/YandexDisk.png" class="icon-img"><span class="text-sm font-bold">Disk Yandex</span></a>
-                    <a href="https://cloud.mail.ru/home/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://home.imgsmail.ru/whiteline/assets/logo/dark/logo.svg" class="icon-img"><span class="text-sm font-bold">Облако Mail.ru</span></a>
+                    <a href="http://127.0.0.1:32400/" class="service-card p-3 rounded-xl flex items-center gap-4">
+                        <img src="https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg" class="icon-img">
+                        <div class="flex flex-col"><span class="text-sm font-bold">Plex</span><span class="text-[10px] opacity-40">Plex Web 😎</span></div>
+                    </a>
+                    <a href="http://192.168.0.10:8096/" class="service-card p-3 rounded-xl flex items-center gap-4">
+                        <div class="w-5 h-5 flex items-center justify-center text-blue-400 font-bold text-[8px] border border-blue-400/30 rounded">JF</div>
+                        <span class="text-sm font-bold">Jellyfin</span>
+                    </a>
+                    <a href="http://84.228.108.50:8096/" class="service-card p-3 rounded-xl flex items-center gap-4">
+                        <div class="w-5 h-5 flex items-center justify-center text-blue-400 font-bold text-[8px] border border-blue-400/30 rounded">JF</div>
+                        <span class="text-sm font-bold">Jellyfin Remote</span>
+                    </a>
+                    <a href="https://www.youtube.com/" class="service-card p-3 rounded-xl flex items-center gap-4">
+                        <div class="w-5 h-5 flex items-center justify-center text-red-500 font-bold text-[10px]">YT</div>
+                        <span class="text-sm font-bold">YouTube</span>
+                    </a>
+                    <a href="https://disk.yandex.com/client/disk" class="service-card p-3 rounded-xl flex items-center gap-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/YandexDisk.png" class="icon-img">
+                        <span class="text-sm font-bold">Disk Yandex</span>
+                    </a>
+                    <a href="https://cloud.mail.ru/home/" class="service-card p-3 rounded-xl flex items-center gap-4">
+                        <img src="https://home.imgsmail.ru/whiteline/assets/logo/dark/logo.svg" class="icon-img">
+                        <span class="text-sm font-bold">Облако Mail.ru</span>
+                    </a>
                 </div>
             </section>
 
@@ -172,12 +192,12 @@
             document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         }
         setInterval(updateTime, 1000); updateTime();
+
         async function fetchInfo() {
+            // Weather fetch from Holon
             fetch('https://wttr.in/Holon?format=%t+%C').then(r => r.text()).then(t => document.getElementById('weather').textContent = t);
-            fetch('https://open.er-api.com/v6/latest/USD').then(r => r.json()).then(d => {
-                document.getElementById('usd-rate').textContent = `₪${d.rates.ILS.toFixed(2)}`;
-                document.getElementById('eur-rate').textContent = `₪${(d.rates.ILS / d.rates.EUR).toFixed(2)}`;
-            });
+            
+            // Public IP fetch
             fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => document.getElementById('public-ip').textContent = d.ip);
         }
         fetchInfo();
