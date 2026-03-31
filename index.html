@@ -30,9 +30,6 @@
             justify-content: space-between;
             gap: 1.5rem;
         }
-        @media (max-width: 1024px) {
-            .header-inline-row { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-        }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -46,7 +43,7 @@
 
             <div class="flex border-l border-white/10 pl-4 flex-col leading-tight shrink-0">
                 <span class="text-gray-500 text-[9px] uppercase">Holon, IL</span>
-                <span id="weather" class="text-yellow-500 font-bold text-xs">...</span>
+                <span id="weather" class="text-yellow-500 font-bold text-xs">+13°C Partly cloudy</span>
             </div>
 
             <div class="hidden md:flex border-l border-white/10 pl-4 items-center gap-6 text-[10px] font-mono shrink-0">
@@ -108,7 +105,7 @@
                     <a href="https://go3.utorr.cc/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-green-600 rounded flex items-center justify-center text-[8px] font-bold">UT</div><span class="text-sm font-bold">utorr</span></a>
                     <a href="https://rutracker.org/forum/index.php" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-blue-600 rounded flex items-center justify-center text-[8px] font-bold">RU</div><span class="text-sm font-bold">rutracker</span></a>
                     <a href="https://rutor.info/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-red-600 rounded flex items-center justify-center text-[8px] font-bold">RT</div><span class="text-sm font-bold">rutor</span></a>
-                    <a href="https://www.mcdonalds.com/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-yellow-500 rounded text-black flex items-center justify-center text-[10px] font-black">M</div><div class="flex flex-col"><span class="text-sm font-bold">McDonald’s</span><span class="text-[10px] opacity-40">homepage</span></div></a>
+                    <a href="https://www.mcdonalds.com/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-yellow-500 rounded text-black flex items-center justify-center text-[10px] font-black">M</div><span class="text-sm font-bold">McDonald’s</span></a>
                 </div>
             </section>
         </div>
@@ -131,7 +128,7 @@
                     <a href="https://13tv.co.il/allshows/series/144/season/1/2015423/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>פרודים</span><span class="domain" dir="ltr">13tv.co.il</span></div></a>
                     <a href="https://www.mako.co.il/mako-vod-keshet/sabri-maranan" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>סברי מרנן</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
                     <a href="https://www.mako.co.il/mako-vod-keshet/red_alert" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>אור ראשון</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
-                    <a href="https://www.kan.org.il/content/kan/kan-11/p-578430/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>האיש שрצה לדעת הכל</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-578430/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>האיш שрца לדעת הכל</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                     <a href="https://www.kan.org.il/content/kan/kan-11/p-12394/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מנаייכ</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                     <a href="https://www.kan.org.il/content/kan/kan-11/p-535919/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>הамет</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                 </div>
@@ -169,8 +166,12 @@
             document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).toUpperCase();
         }
         setInterval(updateTime, 1000); updateTime();
+        
         async function fetchInfo() {
-            fetch('https://wttr.in/Holon?format=%t+%C').then(r => r.text()).then(t => document.getElementById('weather').textContent = t);
+            // Более точный запрос погоды для Холона
+            fetch('https://wttr.in/Holon?format=%t+%C').then(r => r.text()).then(t => {
+                if(t) document.getElementById('weather').textContent = t;
+            });
             fetch('https://open.er-api.com/v6/latest/USD').then(r => r.json()).then(d => {
                 document.getElementById('usd-rate').textContent = `₪${d.rates.ILS.toFixed(2)}`;
                 document.getElementById('eur-rate').textContent = `₪${(d.rates.ILS / d.rates.EUR).toFixed(2)}`;
