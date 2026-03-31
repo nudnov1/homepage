@@ -23,7 +23,6 @@
         .domain { opacity: 0.3; font-size: 0.75rem; }
         .icon-img { width: 22px; height: 22px; object-fit: contain; }
 
-        /* Инлайновая шапка как на скриншоте */
         .header-inline-row {
             display: flex;
             flex-direction: row;
@@ -31,8 +30,8 @@
             justify-content: space-between;
             gap: 1.5rem;
         }
-        @media (max-width: 768px) {
-            .header-inline-row { flex-wrap: wrap; justify-content: center; }
+        @media (max-width: 1024px) {
+            .header-inline-row { flex-wrap: wrap; justify-content: center; gap: 1rem; }
         }
     </style>
 </head>
@@ -52,10 +51,10 @@
 
             <div class="hidden md:flex border-l border-white/10 pl-4 items-center gap-6 text-[10px] font-mono shrink-0">
                 <div class="flex gap-3">
-                    <div><span class="text-gray-500 mr-1 uppercase">USD:</span><span id="usd-rate" class="text-green-500 font-bold text-sm">...</span></div>
-                    <div><span class="text-gray-500 mr-1 uppercase">EUR:</span><span id="eur-rate" class="text-blue-500 font-bold text-sm">...</span></div>
+                    <div><span class="text-gray-500 mr-1 uppercase">USD:</span><span id="usd-rate" class="text-green-500 font-bold">...</span></div>
+                    <div><span class="text-gray-500 mr-1 uppercase">EUR:</span><span id="eur-rate" class="text-blue-500 font-bold">...</span></div>
                 </div>
-                <div><span class="text-gray-500 mr-1 uppercase">IP:</span><span id="public-ip" class="text-purple-400 font-bold text-sm">...</span></div>
+                <div><span class="text-gray-500 mr-1 uppercase">IP:</span><span id="public-ip" class="text-purple-400 font-bold">...</span></div>
             </div>
 
             <div class="flex-grow max-w-md">
@@ -69,7 +68,6 @@
 
     <div class="max-w-[1440px] mx-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
-            
             <section>
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">My First Group</h2>
                 <div class="space-y-2">
@@ -97,8 +95,9 @@
                     <a href="http://192.168.0.1/" class="service-card p-3 rounded-xl flex items-center gap-4"><span class="text-[10px] font-bold opacity-40">RT</span><span class="text-sm font-bold">Router</span></a>
                     <a href="http://nas/" class="service-card p-3 rounded-xl flex items-center gap-4"><span class="text-[10px] font-bold opacity-40">NAS</span><span class="text-sm font-bold">NAS</span></a>
                     <a href="http://192.168.0.158:8081/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/metube.svg" class="icon-img"><span class="text-sm font-bold">MeTube</span></a>
-                    <a href="http://192.168.0.160:8123/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="icon-img"><span class="text-sm font-bold">Home Assistant</span></a>
-                    <a href="http://192.168.0.160:3001/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://uptime.kuma.pet/img/icon.svg" class="icon-img"><span class="text-sm font-bold">Uptime Kuma</span></a>
+                    <a href="http://192.168.0.160:8123/dashboard-panel/0" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant.svg" class="icon-img"><span class="text-sm font-bold">Home Assistant</span></a>
+                    <a href="http://192.168.0.160:4357/" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/home-assistant-alt.svg" class="icon-img"><span class="text-sm font-bold">HA observer</span></a>
+                    <a href="http://192.168.0.160:3001/dashboard" class="service-card p-3 rounded-xl flex items-center gap-4"><img src="https://uptime.kuma.pet/img/icon.svg" class="icon-img"><span class="text-sm font-bold">Uptime Kuma</span></a>
                 </div>
             </section>
 
@@ -106,9 +105,10 @@
                 <h2 class="text-xs font-bold mb-4 opacity-50 uppercase tracking-widest">Top Services</h2>
                 <div class="space-y-2">
                     <a href="https://megapeer.vip/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-blue-500 rounded flex items-center justify-center text-[8px] font-bold">MG</div><span class="text-sm font-bold">megapeer</span></a>
-                    <a href="https://rutracker.org/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-blue-600 rounded flex items-center justify-center text-[8px] font-bold">RU</div><span class="text-sm font-bold">rutracker</span></a>
+                    <a href="https://go3.utorr.cc/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-green-600 rounded flex items-center justify-center text-[8px] font-bold">UT</div><span class="text-sm font-bold">utorr</span></a>
+                    <a href="https://rutracker.org/forum/index.php" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-blue-600 rounded flex items-center justify-center text-[8px] font-bold">RU</div><span class="text-sm font-bold">rutracker</span></a>
                     <a href="https://rutor.info/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-red-600 rounded flex items-center justify-center text-[8px] font-bold">RT</div><span class="text-sm font-bold">rutor</span></a>
-                    <a href="https://www.mcdonalds.com/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-yellow-500 rounded text-black flex items-center justify-center text-[10px] font-black">M</div><span class="text-sm font-bold">McDonald’s</span></a>
+                    <a href="https://www.mcdonalds.com/" class="service-card p-3 rounded-xl flex items-center gap-4"><div class="w-5 h-5 bg-yellow-500 rounded text-black flex items-center justify-center text-[10px] font-black">M</div><div class="flex flex-col"><span class="text-sm font-bold">McDonald’s</span><span class="text-[10px] opacity-40">homepage</span></div></a>
                 </div>
             </section>
         </div>
@@ -130,6 +130,10 @@
                     <a href="https://www.mako.co.il/mako-vod-keshet/masterchef" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מאסטר שף</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
                     <a href="https://13tv.co.il/allshows/series/144/season/1/2015423/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>פרודים</span><span class="domain" dir="ltr">13tv.co.il</span></div></a>
                     <a href="https://www.mako.co.il/mako-vod-keshet/sabri-maranan" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>סברי מרנן</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
+                    <a href="https://www.mako.co.il/mako-vod-keshet/red_alert" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>אור ראשון</span><span class="domain" dir="ltr">mako.co.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-578430/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>האיש שрצה לדעת הכל</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-12394/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>מנаייכ</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
+                    <a href="https://www.kan.org.il/content/kan/kan-11/p-535919/" class="bookmark-item" dir="rtl"><div class="abbr" dir="ltr">RE</div><div class="link-text"><span>הамет</span><span class="domain" dir="ltr">kan.org.il</span></div></a>
                 </div>
             </div>
             <div class="lg:col-span-4">
@@ -137,6 +141,7 @@
                 <div class="space-y-1">
                     <a href="https://youtube.com/" class="bookmark-item"><div class="abbr text-red-500">YT</div><div class="link-text"><span>YouTube</span><span class="domain">youtube.com</span></div></a>
                     <a href="https://seasonvar.ru/" class="bookmark-item"><div class="abbr">SV</div><div class="link-text"><span>seasonvar</span><span class="domain">seasonvar.ru</span></div></a>
+                    <a href="https://www.ontvtime.ru/" class="bookmark-item"><div class="abbr">TV</div><div class="link-text"><span>Онлайн ТВ</span><span class="domain">ontvtime.ru</span></div></a>
                     <a href="https://kinobase.org/" class="bookmark-item"><div class="abbr">KB</div><div class="link-text"><span>Фильмы онлайн</span><span class="domain">kinobase.org</span></div></a>
                 </div>
             </div>
@@ -146,9 +151,13 @@
             <h2 class="text-sm font-bold mb-4 opacity-50 uppercase tracking-widest">My Sites (Nudnov)</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <a href="https://demo12.nudnov.net/" class="bookmark-item"><div class="abbr">D12</div><div class="link-text"><span>Demo 12</span><span class="domain">nudnov.net</span></div></a>
+                <a href="https://www.markatingtech.com/" class="bookmark-item"><div class="abbr">MT</div><div class="link-text"><span>Marketing Tech</span><span class="domain">markatingtech.com</span></div></a>
+                <a href="https://1.nudnov.net/" class="bookmark-item"><div class="abbr">N1</div><div class="link-text"><span>Nudnov 1</span><span class="domain">nudnov.net</span></div></a>
                 <a href="https://tools.nudnov.net/" class="bookmark-item"><div class="abbr">TL</div><div class="link-text"><span>Tools</span><span class="domain">nudnov.net</span></div></a>
                 <a href="https://keep.nudnov.net/signin" class="bookmark-item"><div class="abbr">KP</div><div class="link-text"><span>Keep Notes</span><span class="domain">nudnov.net</span></div></a>
                 <a href="https://pass.nudnov.net/#/login" class="bookmark-item"><div class="abbr">PS</div><div class="link-text"><span>Passwords</span><span class="domain">nudnov.net</span></div></a>
+                <a href="https://vault.nudnov.net/#/login" class="bookmark-item"><div class="abbr">VT</div><div class="link-text"><span>Vault</span><span class="domain">nudnov.net</span></div></a>
+                <a href="https://mytmp1.nudnov.net/" class="bookmark-item"><div class="abbr">TM</div><div class="link-text"><span>Temp 1</span><span class="domain">nudnov.net</span></div></a>
             </div>
         </div>
     </div>
