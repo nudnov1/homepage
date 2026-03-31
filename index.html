@@ -31,7 +31,11 @@
         }
 
         @media (max-width: 640px) {
-            #clock-container { flex-direction: column; align-items: center; order: -2; }
+/* В секции @media (max-width: 640px) лучше сделать так: */
+@media (max-width: 640px) {
+    #clock-container { 
+        flex-direction: row; /* Изменил с column на row */
+        justify-content: center;
             #date { order: -3; margin-bottom: 0.25rem; }
             .mobile-inline-row { display: flex; justify-content: center; gap: 1rem; width: 100%; }
         }
